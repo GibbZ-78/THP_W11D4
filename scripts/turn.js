@@ -13,8 +13,8 @@ class Turn {
     for (let index = 1; index <= this.players.length; index++) {
       myDrawnNumbersTab.push(this.getRandomIntInclusive(0, this.players.length - 1, myDrawnNumbersTab));
     }
-    // TO DO : Manage actions during each turn. 
-    // ForEach might be too fast. A breakpoint is needed to slow all down and enable humain players to make choices
+    // TO DO : Manage actions during each turn for each player. 
+    // ForEach is "too fast" a loop. Breakpoints are needed to slow all down and enable human players to make choices
     myDrawnNumbersTab.forEach(order => {
       this.multiClassToggle(document.getElementById("card_"+this.players[order].id),"border-danger","border-3", "border-1", "border-light");
       console.log(this.players[order].name + " is now playing...");
@@ -50,6 +50,7 @@ class Turn {
    return draw;
   }
 
+  // Enable to toggle several classes (e.g. 'text-center', 'text-danger', 'border'...) of a DOM element "myElement" at once
   multiClassToggle(myElement, ...myArgs) {
     myArgs.map(e => myElement.classList.toggle(e));
   }
