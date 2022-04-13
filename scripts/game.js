@@ -22,15 +22,15 @@ class Game {
 }
 
 
-let figtherGrace = new Fighter("Grace");
-let paladinUlder = new Paladin("Ulder");
-let monkMoana = new Monk("Moana");
-let berserkerDraven = new Berserker("Draven");
-let assassinZatoichi = new Assassin("Zatoichi");
-let wizardMerlin = new Wizard("Merlin");
-let gibbzGibbz = new Gibbz("Gibbz");
+let figtherGrace = new Fighter("Grace",undefined,undefined,undefined,undefined,"barbarian_girl.jpg");
+let paladinKelly = new Paladin("Kelly",undefined,undefined,undefined,undefined,"lady_knight.jpg");
+let monkMoana = new Monk("Moana",undefined,undefined,undefined,undefined,"priest.jpg");
+let berserkerGutts = new Berserker("ガッツ",undefined,undefined,undefined,undefined,"berserker.jpg");
+let assassinZatoichi = new Assassin("座頭市",undefined,undefined,undefined,undefined,"shinobi.jpg");
+let wizardMerlin = new Wizard("Merlin",undefined,undefined,undefined,undefined,"wizard.jpg");
+let gibbzGibbz = new Gibbz("Gibbz",undefined,undefined,undefined,undefined,"gibbz.jpg");
 
-let myPlayersTab = [figtherGrace, paladinUlder, monkMoana, berserkerDraven, assassinZatoichi, wizardMerlin, gibbzGibbz];
+let myPlayersTab = [figtherGrace, paladinKelly, monkMoana, berserkerGutts, assassinZatoichi, wizardMerlin, gibbzGibbz];
 
 let myPlay = new Game(undefined, myPlayersTab);
 myPlay.launch();

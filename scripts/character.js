@@ -20,18 +20,23 @@ class Character {
     // TO DO: manage the +20 mana gained when killing another player
   }
 
-  showCard(illustration, combo) {
-    let myHTML = "<div class='col-2 my-2 g-0'>"; 
-    myHTML += "<div class='card' style='width: 10rem;'>";
-    myHTML += "<img src='./images/"+illustration+"' class='card-img-top' alt='photo de "+ this.name +"'>";
-    myHTML += "<div class='card-body'>";
-    myHTML += "<h5 class='card-title'>"+ this.name +"</h5>";
-    myHTML += "<p class='card-text'>Health: "+this.health+"</p>";
-    myHTML += "<p class='card-text'>Damage: "+this.damage+"</p>";
-    myHTML += "<p class='card-text'>Mana: "+this.mana+"</p>";
-    myHTML += "<p class='card-text'>Special: "+combo+"</p>";
-    myHTML += "</div>";
-    myHTML += "</div>";
+  showCard(illustration, combo, type) {
+    let myHTML = "";
+    myHTML += "<div class='col-lg-2 col-md-4 m-2'>"; 
+    myHTML += " <div class='card'>";
+    myHTML += "   <img src='./images/"+illustration+"' class='card-img-top' alt='photo de "+ this.name +"'>";
+    myHTML += "   <div class='card-body'>";
+    myHTML += "     <h5 class='card-title'>"+ this.name +"</h5>";
+    myHTML += "     <h6 class='card-subtitle mb-2 fst-italic text-muted'>"+type+"</h6>";
+    myHTML += "     <div class='row justify-content-around'>";
+    myHTML += "       <span class='card-text col-4'><i class='bi bi-heart-pulse-fill text-danger'></i><small> "+this.health+"</small></span>";
+    myHTML += "       <span class='card-text col-4'><i class='bi bi-lightning-fill text-warning'></i><small> "+this.damage+"</small></span>";
+    myHTML += "       <span class='card-text col-4'><i class='bi bi-magic text-primary'></i><small> "+this.mana+"</small></span>";
+    myHTML += "     </div>";
+    myHTML += "   </div>";
+    myHTML += "   <div class='card-footer text-muted small text-center'><i class='bi bi-stars'></i> "+combo+" <i class='bi bi-stars'></i></div>";
+    myHTML += "   </div>";
+    myHTML += " </div>";
     myHTML += "</div>";
     return myHTML;
   }
@@ -40,10 +45,11 @@ class Character {
 
 class Fighter extends Character {
   
-  constructor(name, health = 12, damage = 4, mana = 40, status = "playing", photo = "shinobi.png") {
+  constructor(name, health = 12, damage = 4, mana = 40, status = "playing", photo = "unknown_hero.jpg") {
     super(name, health, damage, mana, status);
     this.special = "Dark Vision";
     this.photo = photo;
+    this.type = "Fighter";
   }
 
   // Combo name: "Dark Vision"
@@ -60,10 +66,11 @@ class Fighter extends Character {
 
 class Paladin extends Character {
   
-  constructor(name, health = 16, damage = 3, mana = 160, status = "playing", photo = "shinobi.png") {
+  constructor(name, health = 16, damage = 3, mana = 160, status = "playing", photo = "unknown_hero.jpg") {
     super(name, health, damage, mana, status);
     this.special = "Healing Lighting";
     this.photo = photo;
+    this.type = "Paladin";
   }
 
   // Combo name: "Healing Lighting"
@@ -80,10 +87,11 @@ class Paladin extends Character {
 
 class Monk extends Character {
   
-  constructor(name, health = 8, damage = 2, mana = 200, status = "playing", photo = "shinobi.png") {
+  constructor(name, health = 8, damage = 2, mana = 200, status = "playing", photo = "unknown_hero.jpg") {
     super(name, health, damage, mana, status);
-    this.special = "Regenerating Prayer";
+    this.special = "Phoenix Prayer";
     this.photo = photo;
+    this.type = "Monk";
   }
 
   // Combo name: "Regenerating Prayer"
@@ -98,10 +106,11 @@ class Monk extends Character {
 
 class Berserker extends Character {
   
-  constructor(name, health = 8, damage = 4, mana = 0, status = "playing", photo = "shinobi.png") {
+  constructor(name, health = 8, damage = 4, mana = 0, status = "playing", photo = "unknown_hero.jpg") {
     super(name, health, damage, mana, status);
     this.special = "Ancients' Rage";
     this.photo = photo;
+    this.type = "Berserker";
   }
 
   // Combo name: "Ancients' Rage"
@@ -120,10 +129,11 @@ class Berserker extends Character {
 
 class Assassin extends Character {
   
-  constructor(name, health = 6, damage = 6, mana = 20, status = "playing", photo = "shinobi.png") {
+  constructor(name, health = 6, damage = 6, mana = 20, status = "playing", photo = "unknown_hero.jpg") {
     super(name, health, damage, mana, status);
     this.special = "Shadow Hit";
     this.photo = photo;
+    this.type = "Assassin";
   }
 
   // Combo name: "Shadow Hit"
@@ -140,10 +150,11 @@ class Assassin extends Character {
 
 class Wizard extends Character {
   
-  constructor(name, health = 10, damage = 2, mana = 200, status = "playing", photo = "shinobi.png") {
+  constructor(name, health = 10, damage = 2, mana = 200, status = "playing", photo = "unknown_hero.jpg") {
     super(name, health, damage, mana, status);
     this.special = "Magic Fireball";
     this.photo = photo;
+    this.type = "Wizard";
   }
 
   // Combo name: "Magic Fireball"
@@ -158,10 +169,11 @@ class Wizard extends Character {
 
 class Gibbz extends Character {
   
-  constructor(name, health = 10, damage = 4, mana = 150, status = "playing", photo = "shinobi.png") {
+  constructor(name, health = 10, damage = 4, mana = 150, status = "playing", photo = "unknown_hero.jpg") {
     super(name, health, damage, mana, status);
     this.special = "Fishbrain Rocket";
     this.photo = photo;
+    this.type = "Gibbz";
   }
 
   // Combo name: "Fishbrain Rocket"
