@@ -1,6 +1,7 @@
 class Character {
   
-  constructor(name, health, damage, mana, status) {
+  constructor(id, name, health, damage, mana, status) {
+    this.id = id;
     this.name = name;
     this.health = health;
     this.damage = damage;
@@ -20,10 +21,10 @@ class Character {
     // TO DO: manage the +20 mana gained when killing another player
   }
 
-  showCard(illustration, combo, type) {
+  showCard(illustration, combo, type, id) {
     let myHTML = "";
     myHTML += "<div class='col-lg-2 col-md-4 m-2'>"; 
-    myHTML += " <div class='card'>";
+    myHTML += " <div class='card' id='card_"+id+"'>";
     myHTML += "   <img src='./images/"+illustration+"' class='card-img-top' alt='photo de "+ this.name +"'>";
     myHTML += "   <div class='card-body'>";
     myHTML += "     <h5 class='card-title'>"+ this.name +"</h5>";
@@ -45,8 +46,8 @@ class Character {
 
 class Fighter extends Character {
   
-  constructor(name, health = 12, damage = 4, mana = 40, status = "playing", photo = "unknown_hero.jpg") {
-    super(name, health, damage, mana, status);
+  constructor(id, name, health = 12, damage = 4, mana = 40, status = "playing", photo = "unknown_hero.jpg") {
+    super(id, name, health, damage, mana, status);
     this.special = "Dark Vision";
     this.photo = photo;
     this.type = "Fighter";
@@ -66,8 +67,8 @@ class Fighter extends Character {
 
 class Paladin extends Character {
   
-  constructor(name, health = 16, damage = 3, mana = 160, status = "playing", photo = "unknown_hero.jpg") {
-    super(name, health, damage, mana, status);
+  constructor(id, name, health = 16, damage = 3, mana = 160, status = "playing", photo = "unknown_hero.jpg") {
+    super(id, name, health, damage, mana, status);
     this.special = "Healing Lighting";
     this.photo = photo;
     this.type = "Paladin";
@@ -87,8 +88,8 @@ class Paladin extends Character {
 
 class Monk extends Character {
   
-  constructor(name, health = 8, damage = 2, mana = 200, status = "playing", photo = "unknown_hero.jpg") {
-    super(name, health, damage, mana, status);
+  constructor(id, name, health = 8, damage = 2, mana = 200, status = "playing", photo = "unknown_hero.jpg") {
+    super(id,name, health, damage, mana, status);
     this.special = "Phoenix Prayer";
     this.photo = photo;
     this.type = "Monk";
@@ -106,8 +107,8 @@ class Monk extends Character {
 
 class Berserker extends Character {
   
-  constructor(name, health = 8, damage = 4, mana = 0, status = "playing", photo = "unknown_hero.jpg") {
-    super(name, health, damage, mana, status);
+  constructor(id, name, health = 8, damage = 4, mana = 0, status = "playing", photo = "unknown_hero.jpg") {
+    super(id, name, health, damage, mana, status);
     this.special = "Ancients' Rage";
     this.photo = photo;
     this.type = "Berserker";
@@ -129,8 +130,8 @@ class Berserker extends Character {
 
 class Assassin extends Character {
   
-  constructor(name, health = 6, damage = 6, mana = 20, status = "playing", photo = "unknown_hero.jpg") {
-    super(name, health, damage, mana, status);
+  constructor(id, name, health = 6, damage = 6, mana = 20, status = "playing", photo = "unknown_hero.jpg") {
+    super(id, name, health, damage, mana, status);
     this.special = "Shadow Hit";
     this.photo = photo;
     this.type = "Assassin";
@@ -150,8 +151,8 @@ class Assassin extends Character {
 
 class Wizard extends Character {
   
-  constructor(name, health = 10, damage = 2, mana = 200, status = "playing", photo = "unknown_hero.jpg") {
-    super(name, health, damage, mana, status);
+  constructor(id, name, health = 10, damage = 2, mana = 200, status = "playing", photo = "unknown_hero.jpg") {
+    super(id, name, health, damage, mana, status);
     this.special = "Magic Fireball";
     this.photo = photo;
     this.type = "Wizard";
@@ -169,8 +170,8 @@ class Wizard extends Character {
 
 class Gibbz extends Character {
   
-  constructor(name, health = 10, damage = 4, mana = 150, status = "playing", photo = "unknown_hero.jpg") {
-    super(name, health, damage, mana, status);
+  constructor(id, name, health = 10, damage = 4, mana = 150, status = "playing", photo = "unknown_hero.jpg") {
+    super(id, name, health, damage, mana, status);
     this.special = "Fishbrain Rocket";
     this.photo = photo;
     this.type = "Gibbz";
