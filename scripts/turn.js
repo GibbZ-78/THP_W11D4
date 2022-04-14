@@ -9,10 +9,8 @@ class Turn {
   start() {
     this.displayCards();
     this.displayPanel();
-    let myDrawnNumbersTab = [];
-    for (let index = 1; index <= this.players.length; index++) {
-      myDrawnNumbersTab.push(this.getRandomIntInclusive(0, this.players.length - 1, myDrawnNumbersTab));
-    }
+    let myDrawnNumbersTab = definePlayersTurns([]);
+    console.table(myDrawnNumbersTab);
     // TO DO : Manage actions during each turn for each player. 
     // ForEach is "too fast" a loop. Breakpoints are needed to slow all down and enable human players to make choices
     myDrawnNumbersTab.forEach(order => {
@@ -44,10 +42,17 @@ class Turn {
     let shouldstop = false;
     let draw = undefined;
     while (!shouldstop) {
-      draw = Math.floor(Math.random() * (max - min +1)) + min;
+      draw = Math.floor(Math.random() * (max - min + 1)) + min;
       shouldstop = !myExclusions.includes(draw);
     }
    return draw;
+  }
+
+  definePlayersTurns(myTmpTab) {
+    for (let index = 1; index <= this.players.length; index++) {
+      myTmpTab.push(this.getRandomIntInclusive(0, this.players.length - 1, myTmpTab));
+    }
+    return myTmpTab;
   }
 
   // Enable to toggle several classes (e.g. 'text-center', 'text-danger', 'border'...) of a DOM element "myElement" at once
