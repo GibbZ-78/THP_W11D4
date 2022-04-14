@@ -32,7 +32,7 @@ class Turn {
         console.log("  > C'est au tour de "+this.players[myOrder].name+" d'attaquer...");
         // TO DO: Check for deaths and victory at each player's turn
       } else {
-        console.log("Le joueur "+this.players[myOrder]+" est mort. On saute son tour !");
+        console.log("Le joueur "+this.players[myOrder].name+" est mort. On saute son tour !");
         this.managePlayerTurn(myPlayersOrder);
       }
     } else {
@@ -47,13 +47,16 @@ class Turn {
   displayCards(mySelectedCard){
     document.getElementById("cards").innerHTML = "";
     this.players.map(element => {
-      document.getElementById("cards").innerHTML += element.showCard(element.photo,element.special, element.type, element.id);
+      document.getElementById("cards").innerHTML += element.showCard(element.photo,element.special, element.specialDescr, element.type, element.id);
       if (element.id == mySelectedCard + 1) {
         this.multiClassAdd(document.getElementById("card_"+element.id),"border-3", "border-primary", "opacity-100");
       } else {
         this.multiClassRemove(document.getElementById("card_"+element.id),"border-3", "border-primary", "opacity-100");
       }
     });
+    let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {return new bootstrap.Tooltip(tooltipTriggerEl)})
+
   }
 
   // Display the in-game menu
