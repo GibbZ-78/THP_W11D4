@@ -20,12 +20,14 @@ class Character {
 
   takeDamage(stroke) {
     this.health = Math.max(0, this.health - stroke);
+    console.log("    > "+this.name+" encaisse "+stroke+" points de dégâts.");
     if (this.health == 0) { 
       this.status = "loser";
     }
   }
 
   dealDamage(opponent) {
+    console.log("    > "+this.name+" attaque "+opponent.name+" avec une force de frappe de "+this.damage+".");
     opponent.takeDamage(this.damage);
     // TO DO: manage the +20 mana gained when killing another player
   }
@@ -69,6 +71,7 @@ class Fighter extends Character {
   specialAttack(opponent) {
     opponent.takeDamage(5);
     this.mana -= 20;
+    console.log("    > "+this.name+" a lancé son combo contre "+opponent.name+", infligeant 5 points de dégâts.");
     // TO DO: manage damage reduction till next round
   }
 
@@ -91,6 +94,7 @@ class Paladin extends Character {
     opponent.takeDamage(4);
     this.health += 5;
     this.mana -= 40;
+    console.log("    > "+this.name+" a lancé son combo contre "+opponent.name+", infligeant 4 points de dégâts.");
   }
 
 }
@@ -110,6 +114,7 @@ class Monk extends Character {
   specialAttack(target) {
     target.health += 8;
     this.mana -= 25;
+    console.log("    > "+this.name+" a guéri "+target.name+", restaurant 8 de ses points de vie.");
   }
 
 }
@@ -126,13 +131,17 @@ class Berserker extends Character {
   // Combo name: "Ancients' Rage"
   // Effect : add 1 to each damage he deals for the rest of the game
   // Cost to cast: 0 mana but 1 hp
-  // NB: can be casted several times a game, increasing his damage rate by 1 each time but sucking his health as well.
-  specialAttack() {
+  // NB 1: can be casted several times a game, increasing his damage rate by 1 each time but sucking his health as well.
+  // NB 2: for genericity reasons, the Berserker method will also take a parameter but won't use it
+  specialAttack(opponent) {
     this.damage += 1;
     this.health -=1;
+    console.log("    > "+this.name+" est entrée ne rage, s'infilgeant 1 point de dégâts mais augmentant sa force frappe d'1 point.");
     if (this.health == 0) { 
       this.status = "loser";
+      console.log("    > Ce faisant, "+this.name+" est mort... Bêtement. Sacré Berserker, tout en muscles...");
     }
+    
   }
 
 }
@@ -153,7 +162,8 @@ class Assassin extends Character {
   specialAttack(opponent) {
     opponent.takeDamage(7);
     this.mana -= 20;
-    // TO DO: manage invicibility till next round
+    // TO DO: manage invincibility till next round
+    console.log("    > "+this.name+" a lancé son combo contre "+opponent.name+", lui infligeant 7 points de dégâts.");
   }
 
 }
@@ -173,6 +183,7 @@ class Wizard extends Character {
   specialAttack(opponent) {
     opponent.takeDamage(7);
     this.mana -= 25;
+    console.log("    > "+this.name+" a lancé son combo contre "+opponent.name+", lui infligeant 7 points de dégâts.");
   }
 
 }
@@ -194,6 +205,7 @@ class Gibbz extends Character {
     opponent.takeDamage(5);
     this.health += 2;
     this.mana -= 25;
+    console.log("    > "+this.name+" a lancé son combo contre "+opponent.name+", lui infligeant 5 points de dégâts.");
   }
 
 }

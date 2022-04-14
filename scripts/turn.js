@@ -21,25 +21,34 @@ class Turn {
     this.managePlayerTurn(myDrawnNumbersTab);
   }
 
+  // Within a given round(Turn), manage each player's turn
   managePlayerTurn(myPlayersOrder) {
     if (myPlayersOrder.length > 0) {
       let myOrder = myPlayersOrder.shift();
-      let hasPlayed = false;
       this.displayCards(myOrder);
-      this.displayPanel(this.players[myOrder], this.round);
       if (this.players[myOrder].health > 0) {
-        //console.log(this.players[myOrder].name + " is now playing...");
-        // WHERE ALL THE MAGIC HAPPEN (chose target, chose attack type, update heroes data...)
-
-        // End of current player's turn >> check for victory and if not yet, switch to next player (if any)
-        this.managePlayerTurn(myPlayersOrder);
+        this.displayPanel(this.players[myOrder], myPlayersOrder);
+        console.log("  > C'est au tour de "+this.players[myOrder].name+" d'attaquer...");
+        // Does nothing until current player's turn 
+        // TO DO: see where and when to check for victory...
+        // this.managePlayerTurn(myPlayersOrder);
       } else {
+        console.log("Le joueur "+this.players[myOrder]+" est mort. On saute son tour !");
         this.managePlayerTurn(myPlayersOrder);
       }
     } else {
-      // End of turn of ALL players >> Check for victory before 10th turn
+      console.log("Fin de tous les tours de tous les joueurs !");
+      // End of ALL players' turn (== end of round) >> Check for victory before 10th turn
     }
   }
+
+  // // Called every second to check if the player has done something to play
+  // checkIfPlayerHasPlayed(myPlayersTurnsTab) {
+  //   if (this.hasPlayed) {
+  //     this.managePlayerTurn(myPlayersTurnsTab);
+  //     clearInterval(myWaitConst);
+  //   }
+  // }
 
   // Call the "showCard" method of each character to display its infos in Bootsrap cards
   displayCards(mySelectedCard){
@@ -55,14 +64,18 @@ class Turn {
   }
 
   // Display the in-game menu
-  displayPanel(myCurrentPlayer) {
+  displayPanel(myCurrentPlayer, myRemainingPlayersID) {
     document.getElementById("panel").innerHTML = "";
     let myHTML ="";
     myHTML += "<h4 class='text-dark text-center mb-3'>In-game display</h4>"
     myHTML += "<h5 class='text-dark text-center my-3'>Round #"+this.round+" / "+ this.totalRounds +"</h5>"
-    myHTML += "<h6 class='text-dark text-start m-2'>Current player: "+myCurrentPlayer.name+"</h6>"
+    myHTML += "<h6 class='text-dark text-start m-2'>Current player:</h6>"
+    myHTML += "<div class='d-flex'>"
+    myHTML += "<img class='rounded border border-primary' height='50px' src='./images/"+myCurrentPlayer.photo+"'/>"
+    myHTML += "<span class='text-dark text-start mx-2'>"+myCurrentPlayer.name+"</span>"
+    myHTML += "</div>"
     myHTML += "<select id='targetSelect' class='form-select form-select-sm small my-2'>";
-    myHTML += "<option value='' class='small' selected>Who should "+myCurrentPlayer.name+" attack?</option>";
+    myHTML += "<option value='' class='small' selected>Choose opponent / target</option>";
     this.players.forEach(element => {
       if (element.id != myCurrentPlayer.id) {
         myHTML += "<option value='"+element.id+"' class='small fst-italic'> > "+element.name+"</option>"; 
@@ -72,18 +85,30 @@ class Turn {
     myHTML += "<button id='attackButton' class='btn btn-sm btn-primary mx-3'><i class='bi bi-heart-arrow'></i> Attack</button>";
     myHTML += "<button id='specialButton' class='btn btn-sm btn-warning mx-3'><i class='bi bi-radioactive'></i> Special</button>";
     document.getElementById("panel").innerHTML = myHTML;
-    document.getElementById("attackButton").addEventListener("click",);
-    document.getElementById("specialButton").addEventListener("click",);
+    document.getElementById("attackButton").addEventListener("click", (event) => this.manageAttackEvent(myCurrentPlayer, document.getElementById("targetSelect").value, myRemainingPlayersID));
+    document.getElementById("specialButton").addEventListener("click", (event) => this.manageSpecialEvent(myCurrentPlayer, document.getElementById("targetSelect").value, myRemainingPlayersID));
   }
   
-  // Manage all the mechanics behind the "attackButton" being pressed
-  manageAttackEvent() {
-
+  // Manage the mechanics behind the "attackButton" being pressed
+  manageAttackEvent(myAttacker, myTargetID, myPlayersOrder) {
+    if (myTargetID != "") {
+      let myTarget = this.players[myTargetID-1];
+      myAttacker.dealDamage(myTarget);
+      this.managePlayerTurn(myPlayersOrder);
+    } else {
+      // Does nothing at this stage
+    }
   }
 
-  // Manage all the mechanics behind the "specialButton" being pressed
-  manageSpecialEvent() {
-
+  // Manage the mechanics behind the "specialButton" being pressed
+  manageSpecialEvent(myAttacker, myTargetID, myPlayersOrder) {
+    if (myTargetID != "") {
+      let myTarget = this.players[myTargetID-1];
+      myAttacker.specialAttack(myTarget);
+      this.managePlayerTurn(myPlayersOrder);
+    } else {
+      // Does nothing at this stage
+    }
   }
 
   // Generate a table including ID of each player (once only), in a randomized order

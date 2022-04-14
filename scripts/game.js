@@ -14,20 +14,20 @@ class Game {
     this.players = playersTab;
   }
 
-  launch () {
-    let myRoundNbr = 1;
-    let myTotalRounds = this.turnLeft;
-    while (this.turnLeft > 0) {
+  // Once the Game created, launches it effectively by starting the 1st round
+  newTurn(myRoundNbr, myTotalRounds) {
+    if (this.turnLeft > 0) {
       console.log(`*** Starting round #${myRoundNbr} (${this.turnLeft} / ${myTotalRounds} remaining) ***`);
       let myTurn = new Turn(this.players, myRoundNbr, myTotalRounds);
       myTurn.start();
       this.turnLeft--;
       console.log(`*** Ending round #${myRoundNbr} (${this.turnLeft} / ${myTotalRounds} remaining) ***`);
       myRoundNbr++;
+      this.newTurn(myRoundNbr, myTotalRounds);
     }
   }
 
-}
+} // End of class Game
 
 // Instantiating 7 players then storing them into a dedicated Array to be passed through classes (Game > Turn)
 let figtherGrace = new Fighter(1,"Grace",undefined,undefined,undefined,undefined,"barbarian_girl.jpg");
@@ -41,8 +41,8 @@ let gibbzGibbz = new Gibbz(7,"Gibbz",undefined,undefined,undefined,undefined,"gi
 let myPlayersTab = [figtherGrace, paladinKelly, monkMoana, berserkerGutts, assassinZatoichi, wizardMerlin, gibbzGibbz];
 
 // Instantiating a new Game and launching it
-let myPlay = new Game(2, myPlayersTab);
-myPlay.launch();
+let myPlay = new Game(3, myPlayersTab);
+myPlay.newTurn(1,myPlay.turnLeft);
 
 /*****************/
 /*  End of code  */
