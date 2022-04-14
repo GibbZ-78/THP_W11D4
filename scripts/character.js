@@ -46,7 +46,8 @@ class Character {
     myHTML += "       <span class='card-text col-4'><small><i class='bi bi-magic text-primary'></i> "+this.mana+"</small></span>";
     myHTML += "     </div>";
     myHTML += "   </div>";
-    myHTML += "   <div class='card-footer text-muted small text-center'><i class='bi bi-stars'></i> "+combo+" <i class='bi bi-stars'></i></div>";
+    myHTML += "   <div id='cardFooter' class='card-footer text-muted small text-center'>";
+    myHTML += "     <i class='bi bi-stars'></i> "+combo+"<i class='bi bi-stars'></i>";
     myHTML += "   </div>";
     myHTML += " </div>";
     myHTML += "</div>";

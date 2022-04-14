@@ -18,6 +18,7 @@ class Turn {
   // Launch a given round / turn with ALL players
   start() {
     let myDrawnNumbersTab = this.definePlayersTurns([]);
+    console.log(`*** Starting round #${this.round} (${myPlay.turnLeft} / ${this.totalRounds} remaining) ***`);
     this.managePlayerTurn(myDrawnNumbersTab);
   }
 
@@ -29,26 +30,18 @@ class Turn {
       if (this.players[myOrder].health > 0) {
         this.displayPanel(this.players[myOrder], myPlayersOrder);
         console.log("  > C'est au tour de "+this.players[myOrder].name+" d'attaquer...");
-        // Does nothing until current player's turn 
-        // TO DO: see where and when to check for victory...
-        // this.managePlayerTurn(myPlayersOrder);
+        // TO DO: Check for deaths and victory at each player's turn
       } else {
         console.log("Le joueur "+this.players[myOrder]+" est mort. On saute son tour !");
         this.managePlayerTurn(myPlayersOrder);
       }
     } else {
-      console.log("Fin de tous les tours de tous les joueurs !");
-      // End of ALL players' turn (== end of round) >> Check for victory before 10th turn
+      myPlay.turnLeft--;
+      console.log(`*** Ending round #${this.round} (${myPlay.turnLeft} / ${this.totalRounds} remaining) ***`);
+      myPlay.newTurn(this.round + 1, myPlay.turnLeft, this.totalRounds);
+      // TO DO: Check for victory before 10th turn
     }
   }
-
-  // // Called every second to check if the player has done something to play
-  // checkIfPlayerHasPlayed(myPlayersTurnsTab) {
-  //   if (this.hasPlayed) {
-  //     this.managePlayerTurn(myPlayersTurnsTab);
-  //     clearInterval(myWaitConst);
-  //   }
-  // }
 
   // Call the "showCard" method of each character to display its infos in Bootsrap cards
   displayCards(mySelectedCard){
@@ -70,9 +63,10 @@ class Turn {
     myHTML += "<h4 class='text-dark text-center mb-3'>In-game display</h4>"
     myHTML += "<h5 class='text-dark text-center my-3'>Round #"+this.round+" / "+ this.totalRounds +"</h5>"
     myHTML += "<h6 class='text-dark text-center m-2'>Current player</h6>"
-    myHTML += "<div class='d-flex rounded border border-primary px-5'>"
-    myHTML += "<img class='rounded' height='50px' src='./images/"+myCurrentPlayer.photo+"'/>"
-    myHTML += "<span class='text-dark text-start mx-2'>"+myCurrentPlayer.name+"</span>"
+    myHTML += "<div class='d-flex rounded border border-primary p-2'>"
+    myHTML += "<img class='rounded my-2' height='50px' src='./images/"+myCurrentPlayer.photo+"'/>"
+    myHTML += "<span class='text-dark text-start m-2 fs-3'>"+myCurrentPlayer.name+"</span>"
+    myHTML += "<span class='text-dark text-end my-2 ms-3 small' style='writing-mode: vertical-rl;'>"+myCurrentPlayer.status+"</span>"
     myHTML += "</div>"
     myHTML += "<select id='targetSelect' class='form-select form-select-sm small my-2'>";
     myHTML += "<option value='' class='small' selected>Choose opponent / target</option>";
@@ -95,8 +89,6 @@ class Turn {
       let myTarget = this.players[myTargetID-1];
       myAttacker.dealDamage(myTarget);
       this.managePlayerTurn(myPlayersOrder);
-    } else {
-      // Does nothing at this stage
     }
   }
 
@@ -106,8 +98,6 @@ class Turn {
       let myTarget = this.players[myTargetID-1];
       myAttacker.specialAttack(myTarget);
       this.managePlayerTurn(myPlayersOrder);
-    } else {
-      // Does nothing at this stage
     }
   }
 
