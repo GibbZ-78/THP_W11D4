@@ -1,3 +1,11 @@
+/*****************************/
+/*                           */
+/*   WINTER'22 IS COMING...  */
+/*                           */
+/*   Coded with ♥ by GibbZ   */
+/*           during          */
+/*    THP Dev Winter 2022    */
+/*****************************/
 
 class Game {
 
@@ -11,7 +19,7 @@ class Game {
     let myTotalRounds = this.turnLeft;
     while (this.turnLeft > 0) {
       console.log(`*** Starting round #${myRoundNbr} (${this.turnLeft} / ${myTotalRounds} remaining) ***`);
-      let myTurn = new Turn(this.players, myRoundNbr);
+      let myTurn = new Turn(this.players, myRoundNbr, myTotalRounds);
       myTurn.start();
       this.turnLeft--;
       console.log(`*** Ending round #${myRoundNbr} (${this.turnLeft} / ${myTotalRounds} remaining) ***`);
@@ -35,3 +43,7 @@ let myPlayersTab = [figtherGrace, paladinKelly, monkMoana, berserkerGutts, assas
 // Instantiating a new Game and launching it
 let myPlay = new Game(2, myPlayersTab);
 myPlay.launch();
+
+/*****************/
+/*  End of code  */
+/*****************/

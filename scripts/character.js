@@ -1,3 +1,12 @@
+/*****************************/
+/*                           */
+/*   WINTER'22 IS COMING...  */
+/*                           */
+/*   Coded with ♥ by GibbZ   */
+/*           during          */
+/*    THP Dev Winter 2022    */
+/*****************************/
+
 class Character {
   
   constructor(id, name, health, damage, mana, status) {
@@ -24,15 +33,15 @@ class Character {
   showCard(illustration, combo, type, id) {
     let myHTML = "";
     myHTML += "<div class='col-lg-2 col-md-4 m-2'>"; 
-    myHTML += " <div class='card' id='card_"+id+"'>";
+    myHTML += " <div class='card opacity-75' id='card_"+id+"'>";
     myHTML += "   <img src='./images/"+illustration+"' class='card-img-top' alt='photo de "+ this.name +"'>";
     myHTML += "   <div class='card-body'>";
     myHTML += "     <h5 class='card-title'>"+ this.name +"</h5>";
     myHTML += "     <h6 class='card-subtitle mb-2 fst-italic text-muted'>"+type+"</h6>";
     myHTML += "     <div class='row justify-content-around'>";
-    myHTML += "       <span class='card-text col-4'><i class='bi bi-heart-pulse-fill text-danger'></i><small> "+this.health+"</small></span>";
-    myHTML += "       <span class='card-text col-4'><i class='bi bi-lightning-fill text-warning'></i><small> "+this.damage+"</small></span>";
-    myHTML += "       <span class='card-text col-4'><i class='bi bi-magic text-primary'></i><small> "+this.mana+"</small></span>";
+    myHTML += "       <span class='card-text col-4'><small><i class='bi bi-heart-pulse-fill text-danger'></i> "+this.health+"</small></span>";
+    myHTML += "       <span class='card-text col-4'><small><i class='bi bi-lightning-fill text-warning'></i> "+this.damage+"</small></span>";
+    myHTML += "       <span class='card-text col-4'><small><i class='bi bi-magic text-primary'></i> "+this.mana+"</small></span>";
     myHTML += "     </div>";
     myHTML += "   </div>";
     myHTML += "   <div class='card-footer text-muted small text-center'><i class='bi bi-stars'></i> "+combo+" <i class='bi bi-stars'></i></div>";
@@ -188,3 +197,7 @@ class Gibbz extends Character {
   }
 
 }
+
+/*****************/
+/*  End of code  */
+/*****************/
