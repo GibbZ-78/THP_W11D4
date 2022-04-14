@@ -69,9 +69,9 @@ class Turn {
     let myHTML ="";
     myHTML += "<h4 class='text-dark text-center mb-3'>In-game display</h4>"
     myHTML += "<h5 class='text-dark text-center my-3'>Round #"+this.round+" / "+ this.totalRounds +"</h5>"
-    myHTML += "<h6 class='text-dark text-start m-2'>Current player:</h6>"
-    myHTML += "<div class='d-flex'>"
-    myHTML += "<img class='rounded border border-primary' height='50px' src='./images/"+myCurrentPlayer.photo+"'/>"
+    myHTML += "<h6 class='text-dark text-center m-2'>Current player</h6>"
+    myHTML += "<div class='d-flex rounded border border-primary px-5'>"
+    myHTML += "<img class='rounded' height='50px' src='./images/"+myCurrentPlayer.photo+"'/>"
     myHTML += "<span class='text-dark text-start mx-2'>"+myCurrentPlayer.name+"</span>"
     myHTML += "</div>"
     myHTML += "<select id='targetSelect' class='form-select form-select-sm small my-2'>";
